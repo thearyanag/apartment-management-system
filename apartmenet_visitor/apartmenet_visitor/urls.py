@@ -17,7 +17,21 @@ from django.contrib import admin
 from django.urls import path,include
 from visitors import views
 from apartmenet_visitor import settings
+from django.conf import settings
+from django.conf.urls.static import static
+
+admin.site.site_header = "NRI City"
+admin.site.site_title = "NRI City"
+admin.site.index_title = "Welcome to NRI City"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.IndexView, name='index')]
+    path('', views.IndexView, name='index'),
+    path('register',views.register_request , name='register'),
+    path('login' , views.login_request , name='login'),
+]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
+
